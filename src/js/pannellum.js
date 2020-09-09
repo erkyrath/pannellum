@@ -1855,6 +1855,16 @@ function renderHotSpot(hs) {
         coord[1] += (canvasHeight - hs.div.offsetHeight) / 2;
         var transform = 'translate(' + coord[0] + 'px, ' + coord[1] +
             'px) translateZ(9999px) rotate(' + config.roll + 'deg)';
+        if (hs.skew) {
+            //var yval = window.magic * hs.pitch * 0.01;
+            var yval = angleoffset(config.yaw, 0.0) * hs.pitch * 0.015;
+            //###
+            if (hs.div.className.includes('dummy')) {
+                console.log('### yaw:', config.yaw, 'fov:', config.hfov);
+            }
+            //###
+            transform += ' skewY(' + yval + 'deg)';
+        }
         if (hs.scale) {
             transform += ' scale(' + (origHfov/config.hfov) / z + ')';
         }
@@ -1862,6 +1872,19 @@ function renderHotSpot(hs) {
         hs.div.style.MozTransform = transform;
         hs.div.style.transform = transform;
     }
+}
+
+/* Given an angle, wraps it to the range -180...180. 
+*/
+    function angleoffset(val, val2)
+{
+    val = (val - val2) % 360.0;
+    if (val >= 180.0)
+        return val - 360.0;
+    else if (val <= -180.0)
+        return val + 360.0;
+    else
+        return val;
 }
 
 /**
