@@ -1858,6 +1858,8 @@ function renderHotSpot(hs) {
         if (hs.skew) {
             //var yval = window.magic * hs.pitch * 0.01;
             var yval = angleoffset(config.yaw, 0.0) * hs.pitch * 0.015;
+	    yval = Math.min(yval, 45);
+	    yval = Math.max(yval, -45);
             //###
             if (hs.div.className.includes('dummy')) {
                 console.log('### yaw:', config.yaw, 'fov:', config.hfov);
