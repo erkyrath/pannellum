@@ -1862,15 +1862,9 @@ function renderHotSpot(hs) {
             transform += ' skewX(' + xval + 'deg)';
         }
         if (hs.skewy !== undefined) {
-            //var yval = window.magic * hs.pitch * 0.01;
             var yval = angleoffset(config.yaw, hs.skewy) * hs.pitch * 0.015;
             yval = Math.min(yval, 45);
             yval = Math.max(yval, -45);
-            //###
-            if (hs.div.className.includes('dummy')) {
-                console.log('### yaw:', config.yaw, 'fov:', config.hfov);
-            }
-            //###
             transform += ' skewY(' + yval + 'deg)';
         }
         if (hs.scale) {
