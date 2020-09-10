@@ -1876,7 +1876,7 @@ function renderHotSpot(hs) {
     }
 }
 
-/* Given an angle, wraps it to the range -180...180. 
+/* Given two angles, returns their difference wrapped to the range -180...180. 
 */
     function angleoffset(val, val2)
 {
