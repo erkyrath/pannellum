@@ -1855,6 +1855,12 @@ function renderHotSpot(hs) {
         coord[1] += (canvasHeight - hs.div.offsetHeight) / 2;
         var transform = 'translate(' + coord[0] + 'px, ' + coord[1] +
             'px) translateZ(9999px) rotate(' + config.roll + 'deg)';
+        if (hs.skewx !== undefined) {
+            var xval = angleoffset(config.pitch, hs.skewx) * hs.yaw * 0.015;
+            xval = Math.min(xval, 45);
+            xval = Math.max(xval, -45);
+            transform += ' skewX(' + xval + 'deg)';
+        }
         if (hs.skewy !== undefined) {
             //var yval = window.magic * hs.pitch * 0.01;
             var yval = angleoffset(config.yaw, hs.skewy) * hs.pitch * 0.015;
