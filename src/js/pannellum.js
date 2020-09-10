@@ -1856,7 +1856,7 @@ function renderHotSpot(hs) {
         var transform = 'translate(' + coord[0] + 'px, ' + coord[1] +
             'px) translateZ(9999px) rotate(' + config.roll + 'deg)';
         if (hs.skewx !== undefined) {
-            var xval = angleoffset(config.pitch, hs.skewx) * hs.yaw * 0.015;
+            var xval = angleoffset(config.pitch, hs.skewx) * angleoffset(hs.yaw, config.yaw) * 0.0175;
             xval = Math.min(xval, 45);
             xval = Math.max(xval, -45);
             transform += ' skewX(' + xval + 'deg)';
