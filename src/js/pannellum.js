@@ -1855,16 +1855,28 @@ function renderHotSpot(hs) {
         coord[1] += (canvasHeight - hs.div.offsetHeight) / 2;
         var transform = 'translate(' + coord[0] + 'px, ' + coord[1] +
             'px) translateZ(9999px) rotate(' + config.roll + 'deg)';
-        if (hs.skewpitch !== undefined) {
-            var xval = angleoffset(config.pitch, hs.skewpitch) * angleoffset(hs.yaw, config.yaw) * 0.0175;
-            xval = Math.min(xval, 60);
-            xval = Math.max(xval, -60);
+        if (hs.skewpitch !== undefined || hs.skewoffsetx !== undefined) {
+            var xval = 0.0;
+            if (hs.skewpitch !== undefined) {
+                xval = angleoffset(config.pitch, hs.skewpitch) * angleoffset(hs.yaw, config.yaw) * 0.0175;
+                xval = Math.min(xval, 60);
+                xval = Math.max(xval, -60);
+            }
+            if (hs.skewoffsetx !== undefined) {
+                xval += hs.skewoffsetx;
+            }
             transform += ' skewX(' + xval + 'deg)';
         }
-        if (hs.skewyaw !== undefined) {
-            var yval = angleoffset(config.yaw, hs.skewyaw) * hs.pitch * 0.015;
-            yval = Math.min(yval, 45);
-            yval = Math.max(yval, -45);
+        if (hs.skewyaw !== undefined || hs.skewoffsety !== undefined) {
+            var yval = 0.0;
+            if (hs.skewyaw !== undefined) {
+                yval = angleoffset(config.yaw, hs.skewyaw) * hs.pitch * 0.015;
+                yval = Math.min(yval, 45);
+                yval = Math.max(yval, -45);
+            }
+            if (hs.skewoffsety !== undefined) {
+                yval += hs.skewoffsety;
+            }
             transform += ' skewY(' + yval + 'deg)';
         }
         if (hs.scale) {
