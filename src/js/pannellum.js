@@ -1855,14 +1855,14 @@ function renderHotSpot(hs) {
         coord[1] += (canvasHeight - hs.div.offsetHeight) / 2;
         var transform = 'translate(' + coord[0] + 'px, ' + coord[1] +
             'px) translateZ(9999px) rotate(' + config.roll + 'deg)';
-        if (hs.skewx !== undefined) {
-            var xval = angleoffset(config.pitch, hs.skewx) * angleoffset(hs.yaw, config.yaw) * 0.0175;
+        if (hs.skewpitch !== undefined) {
+            var xval = angleoffset(config.pitch, hs.skewpitch) * angleoffset(hs.yaw, config.yaw) * 0.0175;
             xval = Math.min(xval, 60);
             xval = Math.max(xval, -60);
             transform += ' skewX(' + xval + 'deg)';
         }
-        if (hs.skewy !== undefined) {
-            var yval = angleoffset(config.yaw, hs.skewy) * hs.pitch * 0.015;
+        if (hs.skewyaw !== undefined) {
+            var yval = angleoffset(config.yaw, hs.skewyaw) * hs.pitch * 0.015;
             yval = Math.min(yval, 45);
             yval = Math.max(yval, -45);
             transform += ' skewY(' + yval + 'deg)';
